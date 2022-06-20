@@ -1,6 +1,7 @@
 const qrcode = require("qrcode-terminal");
 const { Client } = require("whatsapp-web.js");
 const express = require("express");
+const router = require("./routes/main-router.js");
 
 const app = express();
 
@@ -19,6 +20,6 @@ client.on("ready", () => {
 
 client.initialize();
 
-app.use("./routes/main-router.js");
+app.use(router);
 
 app.listen(8000, () => console.log("App is starting."));
