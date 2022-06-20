@@ -1,7 +1,6 @@
 const qrcode = require("qrcode-terminal");
 const { Client } = require("whatsapp-web.js");
 const express = require("express");
-const router = require("./routes/main-router.js");
 
 const app = express();
 
@@ -20,6 +19,15 @@ client.on("ready", () => {
 
 client.initialize();
 
-app.use(router);
+app.post("/send-message", async (req, res) => {
+  const number = `${req.body.number}@c.us`;
+  const message = req.body.message;
+  try {
+    await client.sendMessage(number, message);
+    res.json({ number, message });
+  } catch (err) {
+    res.json(err);
+  }
+});
 
 app.listen(8000, () => console.log("App is starting."));
