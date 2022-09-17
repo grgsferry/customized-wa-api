@@ -2,3 +2,5 @@
 /node_modules
 /.weebjs_auth/session
 .weebjs_auth
+/contact
+/script
